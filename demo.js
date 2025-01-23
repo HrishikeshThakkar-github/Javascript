@@ -60,3 +60,30 @@ isloogedin =true
 ispaid=false
 
 console.log(isloogedin && ispaid)
+
+
+
+let balance=120;
+let newbalance= new Number(200);
+
+
+//primitive and non primitive
+
+//thus in javasript everything is an object
+console.log(balance);
+console.log(newbalance);
+console.log(typeof balance);
+console.log(typeof newbalance);
+
+
+//null and undefinied
+
+let abc;
+console.log(abc);
+
+let def=null;
+console.log(def);
+
+
+
+
