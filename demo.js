@@ -81,9 +81,25 @@ console.log(typeof newbalance);
 let abc;
 console.log(abc);
 
-let def=null;
+let def=null; 
 console.log(def);
 
+//string
 
+let a = "hello";
+let b="world";
+
+console.log(`${a} ${b} string interpolation!` );
+//this signifies that this does the computation whether it is values or fetching variable values
+let demoone=`value is ${2*2}`;
+console.log(demoone);
+
+let sm1=Symbol();
+let sm2=Symbol();
+
+console.group(sm1 == sm2);
+
+
+//the symbol is basically used to define a unique value even if we have same value in symbol it will give out false because the basic usage of symbol is to represent a unique value
 
 
