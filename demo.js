@@ -51,3 +51,12 @@ let bonus=25
 let total=sal+bonus
 
 console.log(total)
+
+let expo=2**2
+console.log(expo)
+
+
+isloogedin =true
+ispaid=false
+
+console.log(isloogedin && ispaid)
