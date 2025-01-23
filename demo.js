@@ -103,3 +103,31 @@ console.group(sm1 == sm2);
 //the symbol is basically used to define a unique value even if we have same value in symbol it will give out false because the basic usage of symbol is to represent a unique value
 
 
+
+//objects
+const username ={
+    firstname:"Hrishi",
+    isloogedin: true,
+};
+
+
+username.firstname="abc";
+username.lastname="thakkar "
+//this tells us that the username has a constant memoryreference but the values in there are mutable also we can add new values and can also remove it
+console.log(username.firstname);
+//another way 
+console.log(username["firstname"]);
+console.log(username.lastname);
+console.log(username);
+
+//there are also many types of inbulit objects like date 
+
+
+//arrays
+let arr1 =["hello", true];
+
+console.log(arr1[1]);
+
+//type conversion
+
+//dont go with implicit type conversion
