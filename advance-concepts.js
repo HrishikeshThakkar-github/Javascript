@@ -36,6 +36,7 @@
 
 // document.createElement("link")
 
+/*
  function addeventlistener(){
     let count=0;
     document.getElementById('changetext').addEventListener("click", function xyz(){
@@ -45,9 +46,40 @@
 
  addeventlistener();
 
- 
+ */
 
  //event listeners are heavy and takes up memory and hence it needs to be freed up thus garbage collector is used
  
+
+ // asynchronous js
+
+/*
+
+ //example-1
+
+console.log("start");
+
+
+setTimeout(function abc(){
+    console.log("call back")
+},5000);
+
+console.log("end");
+*/
+
+
+
+//example-2
+
+console.log("start");
+
+
+document.getElementById('changetext').addEventListener("click",function cb(){
+    console.log("call back");
+    
+})
+console.log("end");
+
+//here also first start and end will get executed and when button is clicked then call back is printed
 
  
