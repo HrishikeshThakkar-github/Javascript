@@ -39,7 +39,7 @@ This "nested" structure is called Callback Hell or Pyramid of Doom, making debug
 When we pass a callback to a function (e.g., createOrder(cart, callback)), we lose control over when and how it will be executed.
 We are blindly trusting another function (which could be written by someone else, or even buggy) to call our callback correctly.
 
-Example Problem:
+Example Proble
 What if createOrder never calls the callback or calls it twice?
 
 javascript
