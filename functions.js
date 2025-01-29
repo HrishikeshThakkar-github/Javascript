@@ -20,13 +20,13 @@ console.log(a);
 
 const calculatetotal = (price,quantity)=> price * quantity;
 
-let total =calculatetotal(20,100)
+let total =calculatetotal(20,100) 
 
 console.log(total);
 
 
 /////----------first-calss function----------//////
-const makeTea=(colour)=> colour
+const makeTea=(colour)=> colour                                                                                                                         
 function processToOrder(teafunction) {
     return teafunction("early grey");
 }
@@ -50,3 +50,7 @@ let teamaker= createteamaker();
 let result = teamaker("green tea");
 
 console.log(result);
+
+
+
+

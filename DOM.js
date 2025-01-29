@@ -24,13 +24,30 @@
 //----DOM----//
 
 
-let hold=document.getElementById('changetext')
+// let hold=document.getElementById('changetext')
 
 
-document.getElementById('changetext').addEventListener("click", function (){
-    //console.log(this);
-    document.getElementById('change-paragraph').textContent="the paragraph is changed";    
-});
+// document.getElementById('changetext').addEventListener("click", function (){
+//     //console.log(this);
+//     document.getElementById('change-paragraph').textContent="the paragraph is changed";    
+// });
 
-/    /note: here arrow functions can not be used as it would reference this to window and not the current object 
+// //note: here arrow functions can not be used as it would reference this to window and not the current object 
 
+// document.createElement("link")
+
+ function addeventlistener(){
+    let count=0;
+    document.getElementById('changetext').addEventListener("click", function xyz(){
+        console.log("button clicked", ++count);
+    });
+ }
+
+ addeventlistener();
+
+ 
+
+ //event listeners are heavy and takes up memory and hence it needs to be freed up thus garbage collector is used
+ 
+
+ 
