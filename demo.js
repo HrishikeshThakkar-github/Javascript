@@ -86,8 +86,8 @@ console.log(def);
 
 //string
 
-let a = "hello";
-let b="world";
+let a = "hello string a";
+let b="world string b";
 
 console.log(`${a} ${b} string interpolation!` );
 //this signifies that this does the computation whether it is values or fetching variable values
