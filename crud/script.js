@@ -24,7 +24,7 @@ function readALL() {
     ));
 
     tabledata.innerHTML = elements;
-    // Removed the incorrect data.push(elements) here
+    
 }
 
 // Ensure readALL is called when the page loads
