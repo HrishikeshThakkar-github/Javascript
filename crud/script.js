@@ -23,7 +23,6 @@ function readALL() {
     ));
 
     tabledata.innerHTML = elements;
-   
 }
 
 
