@@ -178,13 +178,13 @@ let coffee = new Drink("coffee")
 
 
 
-class Calculator{
+// class Calculator{
 
 
-    static add(a,b){
-        return a+b;
-    }
-}
+//     static add(a,b){
+//         return a+b;
+//     }
+// }
 
 // let miniCalc = new Calculator();
 // console.log(miniCalc.add(2,3));
@@ -193,5 +193,5 @@ class Calculator{
 //this object cant access as it is static only class can access
 
 
-console.log(Calculator.add(2,4));
+// console.log(Calculator.add(2,4));
 
