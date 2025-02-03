@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container{
+    background-color: rgb(66, 65, 65);
+    color: white;
+    width: auto;
+    height: auto;
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+}
+
+.heading{
+    font-size: 60px;
+    border-radius: 2px solid white;
+    padding: 0.5rem;
+}
+
+.input-container{
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+}
+
+#todo-input{
+    font-size: large;
+}
+
+.add-task-btn{
+    font-size: large;
+}
