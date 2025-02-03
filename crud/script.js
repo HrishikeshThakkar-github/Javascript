@@ -1,17 +1,16 @@
-let data = JSON.parse(localStorage.getItem("object")) || [
-    { id: 1, name: "hrishi", email: "hri@gmail.com" },
-    { id: 2, name: "kesh", email: "kesh@gmail.com" },
-    { id: 3, name: "thakkar", email: "thakkar@gmail.com" }
-];
+let data = JSON.parse(localStorage.getItem("object")) || [];
+    // { id: 1, name: "hrishi", email: "hri@gmail.com" },
+    // { id: 2, name: "kesh", email: "kesh@gmail.com" },
+    // { id: 3, name: "thakkar", email: "thakkar@gmail.com" }
 
 function readALL() {
-    // Save the current data array to localStorage
+  
     localStorage.setItem("object", JSON.stringify(data));
     
     var tabledata = document.querySelector(".data_table");
     var elements = "";
 
-    // Generate table rows from the data array
+  
     data.map(record => (
         elements += `<tr>
             <td>${record.name}</td>
@@ -24,10 +23,9 @@ function readALL() {
     ));
 
     tabledata.innerHTML = elements;
-    
 }
 
-// Ensure readALL is called when the page loads
+
 document.addEventListener('DOMContentLoaded', readALL);
 
 function create() {
@@ -45,7 +43,7 @@ function add() {
     document.querySelector(".create_form").style.display = "none";
     document.querySelector(".add-btn").style.display = "block";
 
-    readALL(); // Updates localStorage and the table
+    readALL(); 
 }
 
 function edit(id) {
@@ -65,10 +63,11 @@ function update() {
     var index = data.findIndex(rec => rec.id === id);
     data[index] = { id, name, email };
     document.querySelector(".update_form").style.display = "none";
-    readALL(); // Updates localStorage and the table
+    readALL(); 
 }
 
 function deleteItem(id) {
     data = data.filter(rec => rec.id !== id);
-    readALL(); // Updates localStorage and the table after deletion
+    readALL(); 
 }
+
