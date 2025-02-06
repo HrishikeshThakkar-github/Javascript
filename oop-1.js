@@ -195,3 +195,46 @@ let coffee = new Drink("coffee")
 
 // console.log(Calculator.add(2,4));
 
+
+
+//objects
+
+// const person ={}
+// person.firstname="hrishi";
+// person.lastname="thakkar";
+// person.age="21";
+// person.eyeColor="black";
+
+// console.log(person);
+
+
+function person(first, last, age, eye){
+    this.firstname=first;
+    this.lastname=last;
+    this.age=age;
+    this.eye_color=eye;
+}
+
+const myFather = new person("amar","thakkar",48,"blue");
+const myMother = new person("Sally", "Rally", 48, "green");
+const mySister = new person("Anna", "Rally", 18, "green");
+
+const mySelf = new person("Johnny", "Rally", 22, "green");
+console.log(myFather);
+
+
+//We also learned that you can not add a new property to an existing object constructor:
+
+//Person.nationality = "English";
+
+//JavaScript prototype property allows you to add new properties to object constructors:
+
+person.prototype.nationality = "English";
+
+console.log(myFather.nationality);
+
+person.prototype.abc= function(){
+    return this.firstname
+}
+
+console.log(myFather.abc());
