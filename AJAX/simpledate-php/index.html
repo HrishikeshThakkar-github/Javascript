@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Date using AJAX</title>
+</head>
+<body>
+    <h3>Demonstrate AJAX</h3>
+    <form action="" method="get">
+        <input type="button" value="click" onclick="sendRequest()" />
+    </form>
+    <div id="response-output">
+        Hello
+    </div>
+</body>
+
+<script>
+    function sendRequest() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("response-output").innerHTML = this.responseText;
+            }
+        };
+        xhr.open('GET', './index.php', true);
+        xhr.send();
+    }
+</script>
+</html>
