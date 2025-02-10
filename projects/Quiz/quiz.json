@@ -1,0 +1,17 @@
+[
+    {
+        "question": "What is the capital of France?",
+        "options": ["Paris", "London", "Berlin", "Madrid"],
+        "correctAnswer": 0
+    },
+    {
+        "question": "Which is the largest planet in our solar system?",
+        "options": ["Earth", "Mars", "Jupiter", "Venus"],
+        "correctAnswer": 2
+    },
+    {
+        "question": "Who wrote 'To Kill a Mockingbird'?",
+        "options": ["Harper Lee", "J.K. Rowling", "George Orwell", "Mark Twain"],
+        "correctAnswer": 0
+    }
+]
