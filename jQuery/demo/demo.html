@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX with JSON Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Post and Get Data using AJAX with JSON</h1>
+    
+    <h3>Post New Data</h3>
+    <form id="postForm">
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title"><br><br>
+        
+        <label for="body">Body:</label><br>
+        <textarea id="body" name="body"></textarea><br><br>
+        
+        <button type="submit">Post Data</button>
+    </form>
+    
+    <h3>All Posts:</h3>
+    <div id="postsContainer">
+        <!-- Posts will appear here -->
+    </div>
+    
+    <script>
+        // Load and display all posts from the JSON file
+        function loadPosts() {
+            $.ajax({
+                url: 'data.json',
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    let postsHTML = '';
+                    response.forEach(function(post) {
+                        postsHTML += `
+                            <div class="post">
+                                <h4>${post.title}</h4>
+                                <p>${post.body}</p>
+                            </div>
+                        `;
+                    });
+                    $('#postsContainer').html(postsHTML);
+                },
+                error: function(xhr, status, error) {
+                    console.log("Error fetching posts:", error);
+                }
+            });
+        }
+        
+        // Handle the post form submission
+        $('#postForm').submit(function(event) {
+            event.preventDefault();
+            
+            const newPost = {
+                title: $('#title').val(),
+                body: $('#body').val()
+            };
+
+            $.ajax({
+                url: 'data.json',  // Normally this would be your API endpoint
+                type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(newPost),
+                success: function(response) {
+                    console.log("Post added successfully!");
+                    loadPosts();  // Reload posts after adding new one
+                },
+                error: function(xhr, status, error) {
+                    console.log("Error posting data:", error);
+                }
+            });
+        });
+
+        // Load posts when the page is loaded
+        $(document).ready(function() {
+            loadPosts();
+        });
+    </script>
+</body>
+</html>

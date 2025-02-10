@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product CRUD</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+        .product-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .btn {
+            margin: 2px;
+        }
+        .form-container {
+            display: none;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-4">
+    <h2 class="text-center text-primary">Product Management System</h2>
+
+    <!-- Search and Sorting -->
+    <div class="d-flex justify-content-between align-items-center my-3">
+        <input type="text" class="form-control w-50 search-box" placeholder="Search by name or price" onkeyup="search()">
+        <div>
+            <button class="btn btn-outline-primary" onclick="sortTable('name')">Sort by Name</button>
+            <button class="btn btn-outline-success" onclick="sortTable('price')">Sort by Price</button>
+        </div>
+    </div>
+
+    <!-- Product Table -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody class="data_table"></tbody>
+        </table>
+    </div>
+
+    <!-- Add Product Button -->
+    <button class="btn btn-primary w-100 my-3 add-btn" onclick="create()">➕ Add Product</button>
+
+    <!-- Create Product Form -->
+    <div class="form-container create_form">
+        <h4>Add Product</h4>
+        <input type="text" class="form-control my-2 pname" placeholder="Product Name">
+        <input type="number" class="form-control my-2 pprice" placeholder="Product Price">
+        <input type="text" class="form-control my-2 pimage" placeholder="Image URL">
+        <button class="btn btn-success w-100 my-2" onclick="add()">Submit</button>
+        <button class="btn btn-danger w-100" onclick="cancelCreate()">Cancel</button>
+    </div>
+
+    <!-- Update Product Form -->
+    <div class="form-container update_form">
+        <h4>Update Product</h4>
+        <input type="hidden" class="pid">
+        <input type="text" class="form-control my-2 upname">
+        <input type="number" class="form-control my-2 upprice">
+        <input type="text" class="form-control my-2 upimage">
+        <button class="btn btn-success w-100 my-2" onclick="update()">Update</button>
+        <button class="btn btn-danger w-100" onclick="cancelUpdate()">Cancel</button>
+    </div>
+</div>
+
+<script>
+let data = JSON.parse(localStorage.getItem("products")) || [
+    { id: 1, name: "Laptop", price: 50000, image: "https://via.placeholder.com/60" },
+    { id: 2, name: "Phone", price: 30000, image: "https://via.placeholder.com/60" },
+    { id: 3, name: "Tablet", price: 20000, image: "https://via.placeholder.com/60" }
+];
+
+function readALL(filteredData = data) {
+    localStorage.setItem("products", JSON.stringify(data));
+
+    var tabledata = document.querySelector(".data_table");
+    tabledata.innerHTML = "";
+
+    filteredData.forEach(record => {
+        tabledata.innerHTML += `<tr>
+            <td>${record.id}</td>
+            <td>${record.name}</td>
+            <td>₹${record.price}</td>
+            <td><img src="${record.image}" class="product-img"></td>
+            <td>
+                <button class="btn btn-danger btn-sm" onclick="deleteItem(${record.id})">🗑 Delete</button>
+                <button class="btn btn-warning btn-sm" onclick="edit(${record.id})">✏ Edit</button>
+            </td>
+        </tr>`;
+    });
+}
+
+document.addEventListener('DOMContentLoaded', readALL);
+
+function create() {
+    document.querySelector(".create_form").style.display = "block";
+    document.querySelector(".add-btn").style.display = "none";
+}
+
+function cancelCreate() {
+    document.querySelector(".create_form").style.display = "none";
+    document.querySelector(".add-btn").style.display = "block";
+}
+
+function add() {
+    var name = document.querySelector(".pname").value;
+    var price = document.querySelector(".pprice").value;
+    var image = document.querySelector(".pimage").value;
+
+    var newObj = { id: Date.now(), name, price: parseFloat(price), image };
+    data.push(newObj);
+
+    cancelCreate();
+    readALL();
+}
+
+function edit(id) {
+    document.querySelector(".update_form").style.display = "block";
+
+    var obj = data.find(rec => rec.id === id);
+    document.querySelector(".pid").value = obj.id;
+    document.querySelector(".upname").value = obj.name;
+    document.querySelector(".upprice").value = obj.price;
+    document.querySelector(".upimage").value = obj.image;
+}
+
+function cancelUpdate() {
+    document.querySelector(".update_form").style.display = "none";
+}
+
+function update() {
+    var id = parseInt(document.querySelector(".pid").value);
+    var name = document.querySelector(".upname").value;
+    var price = document.querySelector(".upprice").value;
+    var image = document.querySelector(".upimage").value;
+
+    var index = data.findIndex(rec => rec.id === id);
+    data[index] = { id, name, price: parseFloat(price), image };
+
+    cancelUpdate();
+    readALL();
+}
+
+function deleteItem(id) {
+    data = data.filter(rec => rec.id !== id);
+    readALL();
+}
+
+function search() {  
+    var searchValue = document.querySelector(".search-box").value.toLowerCase();
+
+    var filteredData = data.filter(record =>
+        record.name.toLowerCase().includes(searchValue) || 
+        record.price.toString().includes(searchValue)
+    );
+
+    readALL(filteredData);
+}
+
+let sortOrder = { name: 'asc', price: 'asc' };
+
+function sortTable(field) {
+    if (sortOrder[field] === 'asc') {
+        data.sort((a, b) => (a[field] > b[field] ? 1 : -1));
+        sortOrder[field] = 'desc';
+    } else {
+        data.sort((a, b) => (a[field] < b[field] ? 1 : -1));
+        sortOrder[field] = 'asc';
+    }
+
+    readALL();
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

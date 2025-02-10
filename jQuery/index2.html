@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX with JSON & Local Storage</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        #loading {
+            display: none;
+            font-size: 20px;
+            font-weight: bold;
+            color: #007bff;
+        }
+        #posts ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #posts li {
+            margin-bottom: 15px;
+        }
+        .update-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Fetched Posts</h1>
+    
+    <button id="loadData">Load Posts</button>
+    <button id="clearData">Clear Local Storage</button>
+
+    <div id="loading">Loading...</div>
+    <div id="posts"></div>
+
+    <script>
+        $(document).ready(function() {
+            // Check if the data is already in Local Storage
+            if (localStorage.getItem("postsData")) {
+                // If data exists in Local Storage, load it
+                displayPosts(JSON.parse(localStorage.getItem("postsData")));
+            } else {
+                // If no data in Local Storage, fetch data from the API
+                fetchData();
+            }
+
+            // Load posts manually when button is clicked
+            $("#loadData").click(function() {
+                fetchData();
+            });
+
+            // Clear Local Storage and reload data
+            $("#clearData").click(function() {
+                localStorage.removeItem("postsData");  // Clear Local Storage
+                $('#posts').empty(); // Clear current posts from DOM
+                fetchData(); // Fetch data again
+            });
+
+            function fetchData() {
+                $('#loading').show(); // Show loading indicator
+
+                $.ajax({
+                    url: 'https://jsonplaceholder.typicode.com/posts',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(response) {
+                        // Store the data in Local Storage
+                        localStorage.setItem("postsData", JSON.stringify(response));
+                        displayPosts(response); // Display the posts
+                        $('#loading').hide(); // Hide loading indicator
+                    },
+                    error: function(xhr, status, error) {
+                        console.log("Error fetching data: " + error);
+                        $('#loading').hide(); // Hide loading indicator
+                        $('#posts').html('<p>There was an error fetching the data.</p>');
+                    }
+                });
+            }
+
+            // Function to display posts dynamically
+            function displayPosts(posts) {
+                var output = "<ul>";
+                $.each(posts, function(index, post) {
+                    output += "<li>" +
+                        "<h3>" + post.title + "</h3>" +
+                        "<p>" + post.body + "</p>" +
+                        "<button class='update-btn' data-index='" + index + "'>Update</button>" +
+                        "</li>";
+                });
+                output += "</ul>";
+                $('#posts').html(output);
+
+                // Attach event listener for update buttons
+                $('.update-btn').click(function() {
+                    var index = $(this).data('index');
+                    var postToUpdate = posts[index];
+                    var newTitle = prompt("Update title", postToUpdate.title);
+                    var newBody = prompt("Update body", postToUpdate.body);
+
+                    if (newTitle && newBody) {
+                        // Update the post data
+                        postToUpdate.title = newTitle;
+                        postToUpdate.body = newBody;
+
+                        // Store updated data in Local Storage
+                        localStorage.setItem("postsData", JSON.stringify(posts));
+
+                        // Re-render the posts with the updated data
+                        displayPosts(posts);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
