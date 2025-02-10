@@ -1,17 +1,52 @@
 [
     {
-        "question": "What is the capital of France?",
-        "options": ["Paris", "London", "Berlin", "Madrid"],
+        "question": "What does HTML stand for?",
+        "options": ["HyperText Markup Language", "HighText Machine Language", "Hyperlinks and Text Markup Language", "Home Tool Markup Language"],
         "correctAnswer": 0
     },
     {
-        "question": "Which is the largest planet in our solar system?",
-        "options": ["Earth", "Mars", "Jupiter", "Venus"],
-        "correctAnswer": 2
+        "question": "Which HTML tag is used to define an internal style sheet?",
+        "options": ["style", "css", "script", "stylesheet"],
+        "correctAnswer": 0
     },
     {
-        "question": "Who wrote 'To Kill a Mockingbird'?",
-        "options": ["Harper Lee", "J.K. Rowling", "George Orwell", "Mark Twain"],
+        "question": "Which of the following is a valid CSS selector?",
+        "options": [".class", "#id", "element", "All of the above"],
+        "correctAnswer": 3
+    },
+    {
+        "question": "What is the purpose of the <div> tag in HTML?",
+        "options": ["To define a section of the page", "To display text", "To create a hyperlink", "To insert an image"],
         "correctAnswer": 0
+    },
+    {
+        "question": "What does CSS stand for?",
+        "options": ["Creative Style Sheets", "Cascading Style Sheets", "Computer Style Sheets", "Colorful Style Sheets"],
+        "correctAnswer": 1
+    },
+    {
+        "question": "What is JavaScript mainly used for in web development?",
+        "options": ["Styling web pages", "Creating interactive effects on websites", "Server-side scripting", "Database management"],
+        "correctAnswer": 1
+    },
+    {
+        "question": "Which HTML tag is used to display an image?",
+        "options": ["img", "<picture", "image", "src"],
+        "correctAnswer": 0
+    },
+    {
+        "question": "Which property is used to change the background color in CSS?",
+        "options": ["color", "background-color", "bg-color", "background"],
+        "correctAnswer": 1
+    },
+    {
+        "question": "Which of the following is a front-end JavaScript framework?",
+        "options": ["Django", "Angular", "Spring", "Laravel"],
+        "correctAnswer": 1
+    },
+    {
+        "question": "What does the <a> tag do in HTML?",
+        "options": ["Defines an image", "Creates a hyperlink", "Defines a form", "Inserts a table"],
+        "correctAnswer": 1
     }
 ]

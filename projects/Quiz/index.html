@@ -13,51 +13,25 @@
 
 <body>
     <main>
-
         <div class="outer-container">
             <p id="head">Quiz</p>
             <div class="inner-container">
-                <p id="no-ofquestion">Question no 1 of 10 </p>
-                <p class="time">Time: <span><b>20</b>s</span></p>
+                <p id="no-ofquestion">Question no 1 of 10</p>
             </div>
 
-            
             <div class="question-answer">
-                <div class="question"> Question :
-                    this is a demo question that can be asked ?
-                </div>
-
-                <!-- <div class="answer-outer">
-                    <div class="form-check answer">
-                        <input class="form-check-input" style="margin-left: -1.1em;" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                        <label class="form-check-label" style="margin-left: 0.2em;" for="flexRadioDefault1">
-                            Default radio 1
-                        </label>
-                    </div>
-                    <div class="form-check answer">
-                        <input class="form-check-input" style="margin-left: -1.1em;" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
-                            checked>
-                        <label class="form-check-label" style="margin-left: 0.2em;" for="flexRadioDefault2">
-                            Default radio 2
-                        </label>
-                    </div>
-                    <div class="form-check answer">
-                        <input class="form-check-input" style="margin-left: -1.1em;" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
-                        <label class="form-check-label" style="margin-left: 0.2em;" for="flexRadioDefault1">
-                            Default radio 3
-                        </label>
-                    </div>
-                    <div class="form-check answer">
-                        <input class="form-check-input" style="margin-left: -1.1em;" type="radio" name="flexRadioDefault" id="flexRadioDefault4"
-                            checked>
-                        <label class="form-check-label" style="margin-left: 0.2em;" for="flexRadioDefault2">
-                            Default radio 4
-                        </label>
-                    </div>
-                </div> -->
+                <div class="question"> Question: this is a demo question that can be asked?</div>
+                <div class="answer-outer"></div>
             </div>
 
-            <button type="button" id="submit" class="btn btn-success d-flex justify">submit</button>
+            <button type="button" id="submit" class="btn btn-success d-flex justify">Submit</button>
+        </div>
+
+        <div id="result" style="display: none;">
+            <h3>Your Results:</h3>
+            <p id="correct"></p>
+            <p id="incorrect"></p>
+            <p id="message"></p>
         </div>
     </main>
 
