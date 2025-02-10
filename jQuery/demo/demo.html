@@ -1,138 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Showcase</title>
-
-    <!-- jQuery -->
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-
-        #controls {
-            margin-bottom: 20px;
-        }
-
-        .product {
-            display: inline-block;
-            width: 250px;
-            margin: 15px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .product img {
-            width: 100%;
-            border-radius: 5px;
-        }
-
-        .description {
-            display: none;
-            font-size: 14px;
-            margin-top: 5px;
-        }
-
-        .remove {
-            background: red;
-            color: white;
-            border: none;
-            padding: 5px;
-            cursor: pointer;
-        }
-    </style>
-</head>
-
-<body>
-    <!-- <div id="controls">
-        <button class="filter" data-category="electronics">Electronics</button>
-        <button class="filter" data-category="clothing">Clothing</button>
-        <button id="reset">Show All</button>
-        <button class="sort" data-order="asc">Sort: Low to High</button>
-        <button class="sort" data-order="desc">Sort: High to Low</button>
-    </div>
-
-    <div id="productContainer">
-        <div class="product" data-category="electronics" data-price="500">
-            <h3>Smartphone</h3>
-            <img src="phone.jpg" alt="Smartphone">
-            <p class="description">Latest model with 128GB storage.</p>
-            <p class="price">$500</p>
-            <button class="remove">❌ Remove</button>
-        </div>
-
-        <div class="product" data-category="clothing" data-price="50">
-            <h3>T-Shirt</h3>
-            <img src="shirt.jpg" alt="T-Shirt">
-            <p class="description">100% Cotton, available in multiple sizes.</p>
-            <p class="price">$50</p>
-            <button class="remove">❌ Remove</button>
-        </div>
-    </div>
-    <div id="draggable" style="width: 150px; height: 150px; background-color: lightblue; text-align: center;">
-        Drag me!
-    </div> -->
-
+    <title>AJAX with JSON Example</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+</head>
+<body>
+    <h1>Post and Get Data using AJAX with JSON</h1>
+    
+    <h3>Post New Data</h3>
+    <form id="postForm">
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title"><br><br>
+        
+        <label for="body">Body:</label><br>
+        <textarea id="body" name="body"></textarea><br><br>
+        
+        <button type="submit">Post Data</button>
+    </form>
+    
+    <h3>All Posts:</h3>
+    <div id="postsContainer">
+        <!-- Posts will appear here -->
+    </div>
+    
     <script>
-        // console.log($.ui);  // Should not be undefined if jQuery UI is loaded correctly
-
-        // $(function () {
-        //     $("#draggable").draggable();
-        // });
-        // console.log($("#draggable").draggable());  // Should log the draggable instance
-
-        // $(document).ready(function () {
-        //     $(".product").hover(function () {
-        //         $(this).css({
-        //             "background-color": "#f0f0f0",
-        //             "transform": "scale(1.05)"
-        //         });
-        //     }, function () {
-        //         $(this).css({
-        //             "background-color": "#fff",
-        //             "transform": "scale(1)"
-        //         });
-        //     });
-
-
-        //     $(".product").draggable();
-        //     $(".description").hide(); // Hide all descriptions initially
-        //     $(".product h3").hover(function () {
-        //         $(this).siblings(".description").slideToggle();
-        //     });
-
-        //     $(".filter").click(function () {
-        //         var category = $(this).data("category");
-        //         $(".product").hide();
-        //         $('.product[data-category="' + category + '"]').fadeIn();
-        //     });
-
-        //     $(".remove").click(function () {
-        //         $(this).parent().fadeOut(500, function () { $(this).remove(); });
-        //     });
-
-            $.get('https://jsonplaceholder.typicode.com/posts', function (response) {
-                console.log(response);
+        // Load and display all posts from the JSON file
+        function loadPosts() {
+            $.ajax({
+                url: 'data.json',
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    let postsHTML = '';
+                    response.forEach(function(post) {
+                        postsHTML += `
+                            <div class="post">
+                                <h4>${post.title}</h4>
+                                <p>${post.body}</p>
+                            </div>
+                        `;
+                    });
+                    $('#postsContainer').html(postsHTML);
+                },
+                error: function(xhr, status, error) {
+                    console.log("Error fetching posts:", error);
+                }
             });
+        }
+        
+        // Handle the post form submission
+        $('#postForm').submit(function(event) {
+            event.preventDefault();
+            
+            const newPost = {
+                title: $('#title').val(),
+                body: $('#body').val()
+            };
 
-            $.post('https://jsonplaceholder.typicode.com/posts', { title: "Product", body: 99 , userId: "31891839183"}, function (response) {
-                console.log(response);
-                
+            $.ajax({
+                url: 'data.json',  // Normally this would be your API endpoint
+                type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(newPost),
+                success: function(response) {
+                    console.log("Post added successfully!");
+                    loadPosts();  // Reload posts after adding new one
+                },
+                error: function(xhr, status, error) {
+                    console.log("Error posting data:", error);
+                }
             });
-            $.get('https://jsonplaceholder.typicode.com/posts', function (response) {
-                console.log(response);
-            });
+        });
 
-
-        // });
+        // Load posts when the page is loaded
+        $(document).ready(function() {
+            loadPosts();
+        });
     </script>
 </body>
-
 </html>

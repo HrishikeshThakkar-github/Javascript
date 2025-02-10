@@ -12,11 +12,11 @@ function buttonClickHandler(){
     xhr.open('POST','https://dummyjson.com/posts', true);
     xhr.getResponseHeader('content-type','application/x-www-form-urlencoded')
     
-    //this true represents asynchrnous behaviour == true 
+    //this true represents asynchrnous behaviour == true iippp;
 
     //what to do on progress
     xhr.onprogress=function (){ 
-        console.log("progress");
+        console.log("progress"); 
         
     }
     //what to do when fetch data
