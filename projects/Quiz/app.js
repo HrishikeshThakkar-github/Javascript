@@ -59,8 +59,8 @@ document.getElementById('submit').addEventListener('click', () => {
 
     displayQuestion(currentQuestionIndex);
 });
-
 function showResults() {
+
     let correctCount = 0;
     let incorrectCount = 0;
 
@@ -77,16 +77,17 @@ function showResults() {
     resultContainer.innerHTML = `
         <h3>Quiz Completed!</h3>
         <p>You got ${correctCount} correct answers and ${incorrectCount} wrong answers.</p>
+
         <button class="btn btn-primary" onclick="restartQuiz()">Restart Quiz</button>
     `;
-
     
-    document.getElementById('submit').style.display = 'none';
+    
 }
 
 function restartQuiz() {
     currentQuestionIndex = 0;
     userResponses = [];
+    document.getElementsByClassName('submitbtn')[0].style.display = 'none';
     document.getElementById('submit').style.display = 'block';
     displayQuestion(currentQuestionIndex);
 }

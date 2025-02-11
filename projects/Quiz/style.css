@@ -22,10 +22,11 @@ main {
     width: 46rem;
 
     background-color: #ffffff;
-    border-radius: 2rem;
+    border-radius: 1rem;
     text-align: center;
     padding-left: 2rem;
     padding-right: 2rem;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.5);
 }
 
 .inner-container {
@@ -65,6 +66,8 @@ main {
     padding: 0.6rem;
     font-size: 1.3rem;
     border: 0.1rem solid rgb(224, 222, 222);
+    display: flex;
+    
 
 }
 
@@ -78,7 +81,7 @@ main {
     flex-direction: column;
     gap: 0.4rem;
 
-    padding-left: 0.6rem;
+    
 }
 
 #submit {
@@ -97,6 +100,11 @@ main {
 
 .form-check-input {
     margin-left: -1.1em;
+    display: block;
+}
+.form-check-label{
+    display: block;
+    padding: 0rem;
 }
 
 .question-answer {
@@ -119,4 +127,15 @@ main {
 
 .result p {
     font-size: 1.2em;
+}
+
+
+input[type="radio"]{
+    display: none;
+}
+
+
+input[type="radio"]:checked + .form-check-label{
+    background-color: #aa50df;
+    color: #ffffff;
 }
